@@ -15,7 +15,7 @@ app.use(cors())
 
 app.get("/",(req,res)=>{
     return res.send("Backend is running successfully")
-}
+})
 
 //Port
 const PORT=process.env.PORT;
