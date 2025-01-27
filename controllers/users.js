@@ -1,6 +1,6 @@
 
 const User = require("../model/user");
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 
 const getalluser=async(req,res)=>{
    try {
@@ -26,7 +26,7 @@ const registerusers=async(req,res)=>{
         .status(401)
         .send({ msg: "User already exsist", success: false});
     }
-    const hashedpassword=await bcrypt.hash(password,10)
+    const hashedpassword=await bcryptjs.hash(password,10)
    // save new user
     const user = await User.create({ username, email, password:hashedpassword });
     await user.save();
@@ -53,7 +53,7 @@ const loginuser=async(req,res)=>{
     return res.status(400).send({msg:"email is not registered",success:false})
   }
 
-  const isMatch=await bcrypt.compare(password,user.password)
+  const isMatch=await bcryptjs.compare(password,user.password)
   if(!isMatch){
     return res.status(401).send({msg:"Invalid username or password"})
   }

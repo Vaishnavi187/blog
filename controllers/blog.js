@@ -93,10 +93,10 @@ exports.updateblog = async (req, res) => {
 exports.deleteblog = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteblog = await blog.findByIdAndDelete(id).populate("user")
+    const deleteblog = await blog.findByIdAndDelete(id).populate("user");
     await deleteblog.user.blogs.pull(deleteblog)
     deleteblog.user.save()
-    return res
+    return res 
       .status(200)
       .send({ message: "Post deleted successfully", success: true });
   } catch (error) {
