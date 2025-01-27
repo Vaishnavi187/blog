@@ -13,6 +13,10 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors())
 
+app.get("/",(req,res)=>{
+ res.send("Backend is up and running");
+});
+
 //Port
 
 const PORT=process.env.PORT;
